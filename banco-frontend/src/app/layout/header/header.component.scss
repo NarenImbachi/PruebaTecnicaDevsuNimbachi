@@ -1,0 +1,16 @@
+.header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: var(--spacing-xl);
+  background-color: var(--color-background-card); 
+  border-bottom: 1px solid var(--border-color-light); 
+  box-shadow: var(--shadow-sm); 
+  flex-shrink: 0; 
+}
+
+.header-logo {
+  font-size: 1.8rem;  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 1px;
+}
