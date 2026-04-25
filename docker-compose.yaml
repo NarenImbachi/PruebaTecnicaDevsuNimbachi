@@ -1,0 +1,41 @@
+version: "3.9"  # Versión moderna del formato de docker-compose
+
+services:
+  backend:  # Nombre del servicio para la app Java
+    build:
+      context: ./banco-app  # Ruta al directorio donde está el Dockerfile del backend
+    ports:
+      - "8080:8080"  # Expone el puerto 8080 del contenedor al host
+    container_name: banco-backend  # Nombre fijo del contenedor
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/banco_db  # URL de conexión a la base de datos
+      DB_USER: postgres  # Usuario de la base de datos
+      DB_PASSWORD: root  # Contraseña de la base de datos
+    depends_on:
+      - db
+    restart: unless-stopped  # Reinicia automáticamente salvo que lo detengas manualmente
+
+  frontend:  # Servicio del frontend Angular
+    build:
+      context: ./banco-frontend  # Ruta al Dockerfile del frontend
+    ports:
+      - "4200:80"  # Expone el frontend en el puerto 80 del host
+    container_name: banco-frontend
+    depends_on:
+      - backend  # Asegura que backend se inicie antes
+    restart: unless-stopped
+  db:
+    image: postgres:17
+    container_name: postgres_17
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: banco_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

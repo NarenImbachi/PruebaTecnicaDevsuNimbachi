@@ -1,0 +1,31 @@
+# Node modules
+node_modules/
+package-lock.json
+yarn.lock
+
+# Angular
+banco-frontend/dist/
+banco-frontend/.angular/
+
+# Maven
+banco-app/target/
+banco-app/.classpath
+banco-app/.project
+banco-app/.settings/
+banco-app/*.log
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS
+Thumbs.db
